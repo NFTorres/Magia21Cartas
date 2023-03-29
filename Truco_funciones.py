@@ -1,15 +1,16 @@
-import os
-import random
+import sys, random
 from Barajas import *
+from time import sleep
 
-def clear():
-    os.system("clear")
-
+velocidad = 0.04
 def saltos(num):
     for i in range(num-1):
-        print()
-def mensaje(mensaje):
-    print(mensaje)
+        print("")
+def mensaje(mensaje, velocidad = velocidad):
+    for i in mensaje:
+        print(i, end="")
+        sys.stdout.flush()
+        sleep(velocidad)
 
 def barajar(baraja):
     auxiliar = []
@@ -21,14 +22,29 @@ def barajar(baraja):
     baraja = auxiliar
     return baraja
 
+def mostrarbaraja(baraja):
+    indice = 0
+    velocidad = 0.1
+    for i in range(0,13):
+        for j in range(0,4):
+            print(baraja[indice], end=" ")
+            sys.stdout.flush()
+            sleep(velocidad)
+            indice += 1
+        print("")
+
 def mostrarmazo(baraja):
 
     indice = 0
+    velocidad = 0.1
     for i in range(0,7):
         for j in range(0,3):
-            print(baraja[indice], end="  ")
+            print(baraja[indice], end=" ")
+            sys.stdout.flush()
+            sleep(velocidad)
             indice += 1
         print("")
+
 
 def recogermazo(baraja, columna_superior, columna_media, columna_inferior):
     
@@ -42,8 +58,21 @@ def recogermazo(baraja, columna_superior, columna_media, columna_inferior):
                 incremento += 3
             except:
                 pass         
-    print(mazo_recogido)
     return mazo_recogido
 
 def adivinar(baraja):
-    return baraja[10]
+    indice = 0
+    velocidad = 0.1
+    for i in range(0,7):
+        for j in range(0,3):
+            if indice == 10:
+                print(baraja[indice], end=" ")
+                sys.stdout.flush()
+                sleep(velocidad)
+                indice += 1
+            else:
+                print('X', end=" ")
+                sys.stdout.flush()
+                sleep(velocidad)
+                indice += 1
+        print("")
