@@ -1,16 +1,34 @@
+'''Este módulo se
+'''
+__author__ = "Neider Fabian Torres Carvajal"
+__license__ = "GPL"
+__version__ = "1.0.1"
+__email__ = "nftorres@gmail.com"
+
+
 import sys, random
 from Barajas import *
 from time import sleep
 
 velocidad = 0.04
+
+# Métodos estéticos y de espera de respuesta
+
+
+
+# Métodos estéticos
+
 def saltos(num):
     for i in range(num-1):
         print("")
+
 def mensaje(mensaje, velocidad = velocidad):
     for i in mensaje:
         print(i, end="")
         sys.stdout.flush()
         sleep(velocidad)
+
+# Métodos de manipulación de barajas y mazos
 
 def barajar(baraja):
     auxiliar = []
