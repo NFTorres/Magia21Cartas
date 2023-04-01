@@ -10,87 +10,130 @@ import sys, random
 from Barajas import *
 from time import sleep
 
-velocidad = 0.04
-
-# Métodos estéticos y de espera de respuesta
-
+# The speed with which the text will be printed on the screen
+speed = 0.04
 
 
-# Métodos estéticos
 
-def saltos(num):
+# Aesthetic functions
+
+def line_breaks(num):
+    """
+    It prints a number of line breaks equal to the number passed to the function
+    
+    :param num: The number of line breaks you want to print
+    """
     for i in range(num-1):
         print("")
 
-def mensaje(mensaje, velocidad = velocidad):
-    for i in mensaje:
+def message(message, speed = speed):
+    """
+    It prints a string one character at a time, with a delay between each character
+    
+    :param mensaje: The message you want to print
+    :param velocidad: The speed of the text
+    """
+    for i in message:
         print(i, end="")
         sys.stdout.flush()
-        sleep(velocidad)
+        sleep(speed)
 
-# Métodos de manipulación de barajas y mazos
 
-def barajar(baraja):
-    auxiliar = []
-    for i in range(len(baraja)):
-        posicion = random.randint(1, len(baraja))-1
-        carta_elegida = baraja[posicion]
-        auxiliar.append(carta_elegida)
-        baraja.remove(baraja[posicion])
-    baraja = auxiliar
-    return baraja
+# Deck handling functions
 
-def mostrarbaraja(baraja):
-    indice = 0
-    velocidad = 0.1
+def shuffle(deck):
+    """
+    It takes a list of cards from a deck and returns a list of shuffled cards
+    
+    :param baraja: list of cards
+    :return: A list of cards.
+    """
+    auxiliary = []
+    for i in range(len(deck)):
+        position = random.randint(1, len(deck))-1
+        chosen_card = deck[position]
+        auxiliary.append(chosen_card)
+        deck.remove(deck[position])
+    deck = auxiliary
+    return deck
+
+def show_full_deck(deck):
+    """
+    It prints the cards in the deck, one row at a time, with a slight delay between each card. 
+    The cards are dealt in 13 rows and 4 columns.
+    
+    :param baraja: the deck of cards
+    """
+    index = 0
+    speed = 0.1
     for i in range(0,13):
         for j in range(0,4):
-            print(baraja[indice], end=" ")
+            print(deck[index], end=" ")
             sys.stdout.flush()
-            sleep(velocidad)
-            indice += 1
+            sleep(speed)
+            index += 1
         print("")
 
-def mostrarmazo(baraja):
+def show_deck_21_cards(deck):
+    """
+    It prints the 21 cards of the deck that will be used, one row at a time, with a slight delay between each card.
+    The cards are dealt in 7 rows and 3 columns.
+    
+    :param deck: the deck of cards
+    """
 
-    indice = 0
-    velocidad = 0.1
+    index = 0
+    speed = 0.1
     for i in range(0,7):
         for j in range(0,3):
-            print(baraja[indice], end=" ")
+            print(deck[index], end=" ")
             sys.stdout.flush()
-            sleep(velocidad)
-            indice += 1
+            sleep(speed)
+            index += 1
         print("")
 
 
-def recogermazo(baraja, columna_superior, columna_media, columna_inferior):
+def collect_cards(deck, top_column, middle_column, down_column):
+    """
+    It takes a list of cards, and three integers that represent the index of the first card in each
+    column, and returns a list of the cards in each column
     
-    index_list = [columna_superior, columna_media, columna_inferior]
-    mazo_recogido = []
+    :param deck: a list of cards
+    :param top_column: a index
+    :param middle_column: a index
+    :param down_column: a index
+    :return: A list of cards that are collected from the deck.
+    """
+    index_list = [top_column, middle_column, down_column]
+    collected_cards = []
     for i in index_list:
-        incremento = i
-        for j in baraja:
+        increment = i
+        for j in deck:
             try:
-                mazo_recogido.append(baraja[incremento])
-                incremento += 3
+                collected_cards.append(deck[increment])
+                increment += 3
             except:
                 pass         
-    return mazo_recogido
+    return collected_cards
 
-def adivinar(baraja):
-    indice = 0
-    velocidad = 0.1
+def reveal_card(deck):
+    """
+    It prints the deck of cards, revealing the user's card and hiding the others
+    
+    :param deck: list of cards
+    """
+    index = 0
+    speed = 0.1
     for i in range(0,7):
         for j in range(0,3):
-            if indice == 10:
-                print(baraja[indice], end=" ")
+            if index == 10:
+                print(deck[index], end=" ")
                 sys.stdout.flush()
-                sleep(velocidad)
-                indice += 1
+                sleep(speed)
+                index += 1
             else:
                 print('X', end=" ")
                 sys.stdout.flush()
-                sleep(velocidad)
-                indice += 1
+                sleep(speed)
+                index += 1
         print("")
